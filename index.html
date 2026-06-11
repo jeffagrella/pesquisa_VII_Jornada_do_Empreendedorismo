@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prévia — Pesquisa de Perfil · C.E.L. OAB/SP</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===========================================================
+   VII Jornada do Empreendedorismo Legal — C.E.L. OAB/SP
+   Identidade visual replicada do banner oficial
+   Paleta: papel #F5F5F5 · marinho #182933 · azul #3739FE · coral #E43726
+   =========================================================== */
+
+:root{
+  --paper:#efefee;
+  --card:#ffffff;
+  --ink:#182933;
+  --ink-soft:#3a4853;
+  --muted:#6c757e;
+  --blue:#3739fe;
+  --blue-deep:#2426c9;
+  --coral:#e43726;
+  --line:rgba(24,41,51,.12);
+  --line-strong:rgba(24,41,51,.2);
+  --shadow:0 1px 2px rgba(24,41,51,.04), 0 12px 32px -16px rgba(24,41,51,.22);
+  --radius:14px;
+  --maxw:680px;
+  --serif:"Playfair Display",Georgia,serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  line-height:1.55;
+}
+.app{min-height:100vh;display:flex;flex-direction:column}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(55,57,254,.05), transparent 38%),
+    radial-gradient(circle at 88% 92%, rgba(228,55,38,.045), transparent 40%);
+}
+.app > *{position:relative;z-index:1}
+
+/* ---------- shared atoms ---------- */
+.eyebrow{
+  font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);display:inline-flex;align-items:center;gap:10px;
+}
+.dots{display:inline-flex;gap:5px;align-items:center}
+.dots i{width:7px;height:7px;border-radius:50%;display:block}
+.dots i:nth-child(1){background:var(--blue)}
+.dots i:nth-child(2){background:var(--ink)}
+.dots i:nth-child(3){background:var(--coral)}
+
+.btn{
+  appearance:none;border:none;cursor:pointer;font-family:var(--sans);
+  font-size:15px;font-weight:600;border-radius:10px;padding:14px 22px;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .12s ease, background .18s ease, box-shadow .18s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 8px 18px -8px rgba(55,57,254,.6)}
+.btn-primary:hover{background:var(--blue-deep)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line-strong)}
+.btn-ghost:hover{border-color:var(--ink);background:rgba(24,41,51,.03)}
+.btn-coral{background:var(--coral);color:#fff}
+.btn-coral:hover{filter:brightness(.94)}
+.btn-block{width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-sm{padding:9px 14px;font-size:13.5px;border-radius:8px}
+
+.link-quiet{
+  background:none;border:none;cursor:pointer;color:var(--muted);
+  font:inherit;font-size:13px;text-decoration:underline;text-underline-offset:3px;
+}
+.link-quiet:hover{color:var(--ink)}
+
+.puzzle{flex:none}
+
+/* ---------- public layout ---------- */
+.stage{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  padding:48px 20px 32px;
+}
+.brandbar{
+  width:100%;max-width:var(--maxw);display:flex;align-items:center;
+  justify-content:space-between;gap:16px;margin-bottom:40px;
+}
+.wordmark{display:flex;align-items:center;gap:12px}
+.oab{
+  font-family:var(--serif);font-weight:900;font-size:22px;letter-spacing:.02em;
+  color:var(--ink);line-height:1;
+}
+.oab small{display:block;font-family:var(--sans);font-weight:700;font-size:8.5px;
+  letter-spacing:.22em;color:var(--muted);margin-top:3px}
+.wordmark .div{width:1px;height:30px;background:var(--line-strong)}
+.wordmark .sub{font-size:11px;line-height:1.3;color:var(--ink-soft);font-weight:500;max-width:170px}
+
+.card{
+  width:100%;max-width:var(--maxw);background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.card-pad{padding:40px}
+
+/* hero (landing) */
+.hero{ text-align:left }
+.hero .mark{margin-bottom:26px;display:flex;align-items:center;gap:14px}
+.hero h1{
+  font-family:var(--serif);font-weight:800;color:var(--ink);
+  font-size:clamp(30px,5.2vw,46px);line-height:1.04;letter-spacing:-.01em;margin:18px 0 0;
+}
+.hero h1 .accent{color:var(--coral);font-style:italic}
+.hero .lede{margin:20px 0 30px;color:var(--ink-soft);font-size:16.5px;max-width:52ch}
+.hero .meta{
+  display:flex;flex-wrap:wrap;gap:8px 22px;margin:0 0 32px;
+  font-size:13.5px;color:var(--muted);
+}
+.hero .meta b{color:var(--blue);font-weight:600}
+.start-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.start-row .note{font-size:12.5px;color:var(--muted)}
+
+/* progress */
+.progress-wrap{width:100%;max-width:var(--maxw);margin:0 auto 18px;
+  position:sticky;top:14px;z-index:5}
+.progress{
+  background:var(--card);border:1px solid var(--line);border-radius:99px;
+  padding:8px 14px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);
+}
+.progress .track{flex:1;height:6px;background:rgba(24,41,51,.08);border-radius:99px;overflow:hidden}
+.progress .fill{height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,var(--blue),var(--coral));transition:width .35s ease}
+.progress .pct{font-size:12px;font-weight:600;color:var(--ink-soft);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* questions */
+.q{padding:26px 0;border-top:1px solid var(--line)}
+.q:first-of-type{border-top:none;padding-top:4px}
+.q.hidden{display:none}
+.q .qhead{display:flex;gap:12px;align-items:baseline;margin-bottom:16px}
+.q .qnum{font-family:var(--serif);font-weight:700;font-size:15px;color:var(--blue);
+  min-width:26px;line-height:1.4}
+.q .qtitle{font-size:17px;font-weight:600;color:var(--ink);line-height:1.4}
+.req{color:var(--coral);font-weight:700;margin-left:2px}
+.optional-tag{font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--muted);
+  text-transform:uppercase;margin-left:8px;border:1px solid var(--line);
+  padding:1px 7px;border-radius:99px;vertical-align:middle}
+
+.options{display:grid;gap:10px}
+.opt{
+  display:flex;align-items:center;gap:13px;padding:14px 16px;cursor:pointer;
+  border:1.5px solid var(--line);border-radius:11px;background:#fff;
+  transition:border-color .15s ease, background .15s ease;
+}
+.opt:hover{border-color:var(--line-strong);background:#fcfcff}
+.opt input{position:absolute;opacity:0;width:0;height:0}
+.opt .box{
+  width:20px;height:20px;border-radius:50%;border:2px solid var(--line-strong);
+  flex:none;display:grid;place-items:center;transition:border-color .15s ease;
+}
+.opt .box::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--blue);
+  transform:scale(0);transition:transform .15s ease}
+.opt.checked{border-color:var(--blue);background:rgba(55,57,254,.05)}
+.opt.checked .box{border-color:var(--blue)}
+.opt.checked .box::after{transform:scale(1)}
+.opt .label{font-size:15px;color:var(--ink)}
+.q.invalid .qtitle{color:var(--coral)}
+.q .err{display:none;margin-top:10px;font-size:13px;color:var(--coral);font-weight:500}
+.q.invalid .err{display:block}
+
+.submit-row{margin-top:30px;padding-top:26px;border-top:1px solid var(--line);
+  display:flex;flex-direction:column;gap:14px}
+.form-error{display:none;font-size:14px;color:var(--coral);font-weight:500;
+  background:rgba(228,55,38,.07);border:1px solid rgba(228,55,38,.25);
+  padding:12px 14px;border-radius:10px}
+.form-error.show{display:block}
+
+/* consent / disclaimer */
+.consent h2{font-family:var(--serif);font-weight:800;font-size:26px;margin:0 0 6px}
+.consent .sub{color:var(--muted);font-size:14px;margin-bottom:22px}
+.legal{
+  font-size:13.5px;color:var(--ink-soft);line-height:1.65;max-height:46vh;overflow:auto;
+  padding:20px;border:1px solid var(--line);border-radius:12px;background:#fafafa;
+}
+.legal h3{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink);
+  margin:18px 0 8px}
+.legal h3:first-child{margin-top:0}
+.legal p{margin:0 0 10px}
+.legal ul{margin:0 0 10px;padding-left:18px}
+.legal li{margin-bottom:6px}
+.consent-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.anon-badge{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;
+  color:var(--blue-deep);font-weight:600;background:rgba(55,57,254,.07);
+  padding:6px 12px;border-radius:99px;margin-bottom:18px}
+
+/* thank you */
+.thanks{text-align:center;padding:54px 40px}
+.thanks .puzzle-done{margin:0 auto 24px}
+.thanks h2{font-family:var(--serif);font-weight:800;font-size:30px;margin:0 0 12px}
+.thanks p{color:var(--ink-soft);font-size:16px;max-width:46ch;margin:0 auto}
+
+/* footer */
+.foot{width:100%;max-width:var(--maxw);margin:34px auto 0;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:18px 4px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.foot .anuidade{font-weight:700;letter-spacing:.04em;color:var(--ink-soft)}
+.foot .anuidade b{color:var(--coral)}
+
+/* ===========================================================
+   ADMIN
+   =========================================================== */
+.admin{flex:1;width:100%}
+.admin-top{
+  background:var(--ink);color:#fff;padding:0;
+}
+.admin-top .inner{max-width:1080px;margin:0 auto;padding:16px 22px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px}
+.admin-top .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:15px}
+.admin-top .brand .oab{color:#fff;font-size:18px}
+.admin-top .brand .oab small{color:rgba(255,255,255,.6)}
+.admin-top .who{font-size:13px;color:rgba(255,255,255,.7)}
+.admin-top .who b{color:#fff}
+.admin-nav{max-width:1080px;margin:0 auto;padding:0 22px;display:flex;gap:4px;
+  border-bottom:1px solid var(--line)}
+.tab{appearance:none;background:none;border:none;cursor:pointer;font:inherit;
+  font-size:14px;font-weight:600;color:var(--muted);padding:16px 16px;
+  border-bottom:2.5px solid transparent;margin-bottom:-1px}
+.tab:hover{color:var(--ink)}
+.tab.active{color:var(--ink);border-color:var(--coral)}
+.admin-body{max-width:1080px;margin:0 auto;padding:30px 22px 60px}
+
+/* login */
+.login-stage{flex:1;display:grid;place-items:center;padding:40px 20px}
+.login-card{width:100%;max-width:400px}
+.login-card h2{font-family:var(--serif);font-weight:800;font-size:24px;margin:0 0 4px}
+.login-card .sub{color:var(--muted);font-size:13.5px;margin-bottom:24px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:7px}
+.field input{
+  width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;
+  font:inherit;font-size:15px;color:var(--ink);background:#fff;
+}
+.field input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(55,57,254,.12)}
+.inline-error{font-size:13px;color:var(--coral);font-weight:500;margin-top:4px;min-height:1px}
+
+/* dashboard */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:30px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.stat .n{font-family:var(--serif);font-weight:800;font-size:34px;color:var(--ink);line-height:1}
+.stat .l{font-size:12.5px;color:var(--muted);margin-top:6px;font-weight:500}
+.stat.accent .n{color:var(--blue)}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:22px 24px;margin-bottom:18px}
+.panel h3{font-size:15px;font-weight:700;margin:0 0 3px;color:var(--ink)}
+.panel .qmeta{font-size:12.5px;color:var(--muted);margin-bottom:18px}
+
+.bar-row{display:flex;align-items:center;gap:14px;margin-bottom:11px}
+.bar-row .name{width:230px;flex:none;font-size:13.5px;color:var(--ink-soft);font-weight:500}
+.bar-row .barwrap{flex:1;background:rgba(24,41,51,.06);border-radius:7px;height:26px;
+  position:relative;overflow:hidden}
+.bar-row .bar{height:100%;border-radius:7px;background:var(--blue);
+  display:flex;align-items:center;min-width:2px;transition:width .5s ease}
+.bar-row .bar.c1{background:var(--blue)}
+.bar-row .bar.c2{background:var(--coral)}
+.bar-row .bar.c3{background:var(--ink)}
+.bar-row .bar.c4{background:#7c8a96}
+.bar-row .val{position:absolute;right:10px;top:0;height:100%;display:flex;align-items:center;
+  font-size:12.5px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.bar-row .val.inside{color:#fff;right:auto;left:10px}
+
+.section-head{display:flex;align-items:center;justify-content:space-between;
+  gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.section-head h2{font-family:var(--serif);font-weight:800;font-size:22px;margin:0}
+
+.admin-list{width:100%;border-collapse:collapse}
+.admin-list th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--muted);padding:8px 12px;border-bottom:1px solid var(--line)}
+.admin-list td{padding:12px;border-bottom:1px solid var(--line);font-size:14px}
+.admin-list tr:last-child td{border-bottom:none}
+.you-tag{font-size:11px;font-weight:600;color:var(--blue);background:rgba(55,57,254,.08);
+  padding:2px 8px;border-radius:99px;margin-left:8px}
+
+.note-box{font-size:13px;color:var(--ink-soft);background:rgba(228,55,38,.06);
+  border:1px solid rgba(228,55,38,.2);border-radius:10px;padding:13px 15px;margin-bottom:20px}
+.note-box b{color:var(--coral)}
+
+.empty{text-align:center;padding:50px 20px;color:var(--muted)}
+.empty .puzzle{margin-bottom:16px;opacity:.5}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--ink);color:#fff;padding:13px 20px;border-radius:10px;font-size:14px;
+  font-weight:500;box-shadow:0 14px 30px -10px rgba(24,41,51,.5);opacity:0;
+  transition:opacity .25s,transform .25s;z-index:100;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.demo-ribbon{background:var(--coral);color:#fff;font-size:12.5px;font-weight:600;
+  text-align:center;padding:7px 14px;letter-spacing:.02em}
+.demo-ribbon a{color:#fff;text-decoration:underline}
+
+@media (max-width:560px){
+  .card-pad{padding:26px 22px}
+  .brandbar .sub{display:none}
+  .bar-row .name{width:130px;font-size:12.5px}
+  .hero h1{font-size:32px}
+  .admin-top .who{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* Adaptador de DEMONSTRAÇÃO (prévia no chat) — armazena tudo localmente
+   via window.storage. Autenticação simplificada apenas para teste.
+   A versão publicada usa um backend real (Netlify Functions). */
+(function(){
+  "use strict";
+  const S = window.storage;
+  const enc = new TextEncoder();
+  let session = null; // {username} em memória
+
+  async function sget(k){ try{ const r=await S.get(k,false); return r?r.value:null; }catch(e){ return null; } }
+  async function sset(k,v){ try{ await S.set(k, typeof v==="string"?v:JSON.stringify(v), false); }catch(e){} }
+  async function sdel(k){ try{ await S.delete(k,false); }catch(e){} }
+  async function slist(prefix){ try{ const r=await S.list(prefix,false); return (r&&r.keys)||[]; }catch(e){ return []; } }
+
+  function rndHex(n){ const a=new Uint8Array(n); crypto.getRandomValues(a);
+    return Array.from(a).map(b=>b.toString(16).padStart(2,"0")).join(""); }
+
+  async function hash(pw, saltHex){
+    const salt=Uint8Array.from(saltHex.match(/.{2}/g).map(h=>parseInt(h,16)));
+    const key=await crypto.subtle.importKey("raw",enc.encode(pw),"PBKDF2",false,["deriveBits"]);
+    const bits=await crypto.subtle.deriveBits({name:"PBKDF2",salt,iterations:60000,hash:"SHA-256"},key,256);
+    return Array.from(new Uint8Array(bits)).map(b=>b.toString(16).padStart(2,"0")).join("");
+  }
+
+  const DEFAULT_TITLE =
+    "Pesquisa de Perfil da Advocacia Empreendedora: Ajude-nos a conhecer quem fez da " +
+    "VII Jornada do Empreendedorismo Legal da C.E.L. OAB/SP um sucesso";
+
+  async function getAdmins(){ const a=await sget("admins"); return a?JSON.parse(a):null; }
+  async function ensureSeed(){
+    let admins=await getAdmins();
+    if(!admins){
+      const salt=rndHex(16); const h=await hash("jornada2026",salt);
+      admins={ admin:{salt,hash:h} }; await sset("admins",admins);
+    }
+    if(await sget("cfg:title")===null) await sset("cfg:title",DEFAULT_TITLE);
+  }
+  function requireAuth(){ if(!session) throw new Error("Sessão expirada. Entre novamente."); }
+
+  window.API = {
+    async getConfig(){ await ensureSeed(); return { title: await sget("cfg:title") }; },
+
+    async submit(answers){
+      await ensureSeed();
+      const id="resp:"+Date.now()+"-"+rndHex(4);
+      await sset(id, Object.assign({createdAt:new Date().toISOString()}, answers));
+      return {ok:true};
+    },
+
+    async login(u,p){
+      await ensureSeed();
+      const admins=await getAdmins(); const rec=admins[u];
+      if(!rec) throw new Error("Usuário ou senha inválidos.");
+      const h=await hash(p,rec.salt);
+      if(h!==rec.hash) throw new Error("Usuário ou senha inválidos.");
+      session={username:u}; return {token:"local",username:u};
+    },
+    restore(){ return session; },
+    logout(){ session=null; },
+    currentUser(){ return session?session.username:null; },
+
+    async setTitle(t){ requireAuth(); await sset("cfg:title",t); return {ok:true}; },
+
+    async getResponses(){
+      requireAuth();
+      const keys=await slist("resp:"); const out=[];
+      for(const k of keys){ const v=await sget(k); if(v) out.push(JSON.parse(v)); }
+      out.sort((a,b)=> (a.createdAt<b.createdAt?1:-1));
+      return out;
+    },
+
+    async listAdmins(){ requireAuth(); const a=await getAdmins()||{}; return Object.keys(a).sort(); },
+    async createAdmin(u,p){
+      requireAuth(); const admins=await getAdmins()||{};
+      if(admins[u]) throw new Error("Já existe um administrador com esse usuário.");
+      const salt=rndHex(16); admins[u]={salt,hash:await hash(p,salt)};
+      await sset("admins",admins); return {ok:true};
+    },
+    async deleteAdmin(u){
+      requireAuth(); const admins=await getAdmins()||{};
+      if(!admins[u]) throw new Error("Administrador não encontrado.");
+      if(Object.keys(admins).length<=1) throw new Error("Não é possível remover o último administrador.");
+      delete admins[u]; await sset("admins",admins);
+      if(session && session.username===u) session=null;
+      return {ok:true};
+    }
+  };
+})();
+
+</script>
+<script>
+/* ===========================================================
+   App core — VII Jornada do Empreendedorismo Legal (C.E.L. OAB/SP)
+   Depende de um objeto global `API` fornecido pelo adaptador
+   (Netlify ou demo local). Não usa localStorage/sessionStorage
+   diretamente — isso é responsabilidade do adaptador.
+   =========================================================== */
+(function(){
+  "use strict";
+
+  const DEFAULT_TITLE =
+    "Pesquisa de Perfil da Advocacia Empreendedora: Ajude-nos a conhecer quem fez da " +
+    "VII Jornada do Empreendedorismo Legal da C.E.L. OAB/SP um sucesso";
+
+  /* ---- Definição das questões + regras condicionais ---- */
+  const Q = [
+    { id:"genero", n:1, title:"Qual sua orientação de gênero?",
+      options:["Feminino","Masculino","Prefiro não responder"],
+      visible:()=>true, required:()=>true },
+
+    { id:"etnia", n:2, title:"Como você se identifica etnicamente?",
+      options:["Pessoa caucasiana/branca","Pessoa afrodescendente/da pele preta","Pessoa indígena","Outros"],
+      visible:()=>true, required:()=>true },
+
+    { id:"faixa", n:3, title:"Qual sua faixa etária?",
+      options:["20 a 30 anos","30 a 40 anos","40 a 50 anos","Mais de 50 anos"],
+      visible:()=>true, required:()=>true },
+
+    { id:"perfil", n:4, title:"Você é...",
+      options:["Advogado(a)","Estagiário com inscrição na OAB/SP","Acadêmico de Direito","Outro"],
+      visible:()=>true, required:()=>true },
+
+    { id:"senioridade", n:5, title:"Se você for advogado(a), qual seu nível de senioridade?",
+      options:["Menos de 5 anos de formado","5 a 10 anos de formado","Mais de 10 anos de formado"],
+      visible:a=>a.perfil==="Advogado(a)", required:a=>a.perfil==="Advogado(a)" },
+
+    { id:"segmento", n:6, title:"Se você atua no mercado jurídico, em qual dos segmentos abaixo você trabalha?",
+      options:["Escritório de advocacia","Departamento jurídico","Outros segmentos (cartórios, despachantes aduaneiros, etc.)"],
+      visible:()=>true, required:a=>!!a.perfil && a.perfil!=="Outro" },
+
+    { id:"porte", n:7, title:"Se você trabalha em um escritório de advocacia, qual o porte dele?",
+      options:["1 a 5 advogados","6 a 10 advogados","11 a 20 advogados","Mais de 20 advogados"],
+      visible:a=>a.segmento==="Escritório de advocacia", required:a=>a.segmento==="Escritório de advocacia" },
+
+    { id:"mudanca", n:8, title:"Você já considerou mudar de área de atuação ou carreira?",
+      options:["Sim","Não","Talvez"],
+      visible:()=>true, required:()=>false },
+  ];
+
+  /* ---- Estado ---- */
+  let answers = {};
+  let surveyTitle = DEFAULT_TITLE;
+  const root = document.getElementById("app");
+
+  /* ---- Helpers ---- */
+  const esc = s => String(s).replace(/[&<>"']/g, c =>
+    ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+  const node = html => { const t=document.createElement("template"); t.innerHTML=html.trim(); return t.content.firstElementChild; };
+  function toast(msg){
+    let t=document.querySelector(".toast");
+    if(!t){ t=node('<div class="toast"></div>'); document.body.appendChild(t); }
+    t.textContent=msg; t.classList.add("show");
+    clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),2600);
+  }
+
+  const PUZZLE = (size,color)=>`<svg class="puzzle" width="${size}" height="${size}" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+    <path d="M6 6h13.5a3 3 0 0 1 2.9 3.8 4.2 4.2 0 0 0 8.2 0A3 3 0 0 1 33.5 6H42v8.5a3 3 0 0 1-3.8 2.9 4.2 4.2 0 0 0 0 8.2A3 3 0 0 1 42 28.5V42H28.5a3 3 0 0 1-2.9-3.8 4.2 4.2 0 0 0-8.2 0A3 3 0 0 1 19.5 42H6V28.5a3 3 0 0 1 3.8-2.9 4.2 4.2 0 0 0 0-8.2A3 3 0 0 1 6 19.5V6Z" fill="${color}"/>
+  </svg>`;
+
+  const WORDMARK = `<div class="wordmark">
+      <div class="oab">OAB<small>SÃO PAULO</small></div>
+      <div class="div"></div>
+      <div class="sub">Comissão de Empreendedorismo Legal · Cultural</div>
+    </div>`;
+
+  const FOOT = `<footer class="foot">
+      <span>VII Jornada do Empreendedorismo Legal · C.E.L. OAB/SP</span>
+      <span class="anuidade">ANUIDADE <b>DE VOLTA</b></span>
+    </footer>`;
+
+  /* =========================================================
+     ROTEAMENTO
+     ========================================================= */
+  function route(){
+    const h = (location.hash||"").toLowerCase();
+    if(h.indexOf("admin")>=0){ renderAdmin(); }
+    else { if(!["consent","survey","thanks"].includes(state.public)) state.public="landing"; renderPublic(); }
+  }
+  const state = { public:"landing" };
+
+  /* =========================================================
+     PÚBLICO
+     ========================================================= */
+  async function loadTitle(){
+    try{ const c = await API.getConfig(); if(c && c.title) surveyTitle=c.title; }catch(e){}
+  }
+
+  function renderPublic(){
+    if(state.public==="landing") return renderLanding();
+    if(state.public==="consent") return renderConsent();
+    if(state.public==="survey")  return renderSurvey();
+    if(state.public==="thanks")  return renderThanks();
+  }
+
+  function renderLanding(){
+    root.innerHTML = "";
+    const wrap = node(`<div class="app">
+      <main class="stage">
+        <div class="brandbar">${WORDMARK}
+          <span class="eyebrow">VII Jornada<span class="dots"><i></i><i></i><i></i></span></span>
+        </div>
+        <section class="card card-pad hero">
+          <div class="mark">${PUZZLE(40,"var(--blue)")}${PUZZLE(40,"var(--ink)")}
+            <span class="eyebrow" style="margin-left:4px">Pesquisa de perfil</span></div>
+          <span class="eyebrow" style="color:var(--coral)">VII Jornada de</span>
+          <h1 id="ttl"></h1>
+          <p class="lede">Esta pesquisa é <b>totalmente anônima</b> e leva cerca de 2 minutos.
+             Ajude a Comissão de Empreendedorismo Legal a conhecer o perfil de quem participou da Jornada.</p>
+          <div class="meta">
+            <span><b>11 jun</b> · 9h</span>
+            <span>Sede OAB SP · R. Maria Paula, 35</span>
+            <span>oabsp.org.br</span>
+          </div>
+          <div class="start-row">
+            <button class="btn btn-primary" id="start">${PUZZLE(18,"#fff")} Começar pesquisa</button>
+            <span class="note">Sem cadastro · sem login</span>
+          </div>
+        </section>
+        ${FOOT}
+        <div style="margin-top:14px"><button class="link-quiet" id="adminlink">Área administrativa</button></div>
+      </main>
+    </div>`);
+    root.appendChild(wrap);
+    const ttl = wrap.querySelector("#ttl");
+    // título: destaca a primeira palavra forte em coral, "Legal" em itálico marinho — eco do banner
+    ttl.innerHTML = formatTitle(surveyTitle);
+    wrap.querySelector("#start").onclick = ()=>{ state.public="consent"; renderConsent(); window.scrollTo(0,0); };
+    wrap.querySelector("#adminlink").onclick = ()=>{ location.hash="#admin"; };
+  }
+
+  function formatTitle(t){
+    // Realça "Empreendedora"/"Empreendedorismo" em coral, como no banner.
+    return esc(t).replace(/(Empreendedor[ai]?|Empreendedorismo)/i, '<span class="accent">$1</span>');
+  }
+
+  function renderConsent(){
+    root.innerHTML="";
+    const wrap = node(`<div class="app"><main class="stage">
+      <div class="brandbar">${WORDMARK}
+        <span class="eyebrow">Consentimento<span class="dots"><i></i><i></i><i></i></span></span></div>
+      <section class="card card-pad consent">
+        <span class="anon-badge">${PUZZLE(14,"var(--blue)")} Pesquisa 100% anônima</span>
+        <h2>Antes de começar</h2>
+        <p class="sub">Termo de consentimento para tratamento de dados — Lei nº 13.709/2018 (LGPD)</p>
+        <div class="legal">
+          <h3>Quem coleta e por quê</h3>
+          <p>Esta pesquisa é conduzida pela <b>Comissão de Empreendedorismo Legal (C.E.L.) da OAB/SP</b>,
+             com finalidade exclusivamente estatística: conhecer o perfil das pessoas que participaram da
+             VII Jornada do Empreendedorismo Legal.</p>
+          <h3>Anonimato</h3>
+          <p>A participação é <b>totalmente anônima</b>. Não coletamos nome, e-mail, CPF, número de inscrição
+             na OAB, telefone, endereço IP ou qualquer dado que permita identificá-lo(a). As respostas são
+             tratadas de forma <b>agregada</b> e não podem ser vinculadas a você.</p>
+          <h3>Como tratamos seus dados (LGPD)</h3>
+          <ul>
+            <li>As respostas serão usadas apenas para análise estatística e elaboração de relatórios institucionais da C.E.L. OAB/SP;</li>
+            <li>Por se tratar de coleta anônima, não há dados pessoais que possam ser vinculados à sua identidade, nos termos do art. 12 da LGPD;</li>
+            <li>Os resultados, sempre de forma agregada, poderão ser armazenados e divulgados pela C.E.L. OAB/SP em comunicações, eventos e estudos sobre empreendedorismo na advocacia;</li>
+            <li>A participação é voluntária e você pode interromper o preenchimento a qualquer momento, sem qualquer prejuízo.</li>
+          </ul>
+          <h3>Consentimento</h3>
+          <p>Ao clicar em <b>“Concordo e continuar”</b>, você manifesta seu consentimento livre, informado e
+             inequívoco para participar desta pesquisa e para o tratamento das respostas nos termos acima.</p>
+        </div>
+        <div class="consent-actions">
+          <button class="btn btn-primary" id="agree">Concordo e continuar</button>
+          <button class="btn btn-ghost" id="decline">Não concordo</button>
+        </div>
+      </section>
+      ${FOOT}
+    </main></div>`);
+    root.appendChild(wrap);
+    wrap.querySelector("#agree").onclick=()=>{ answers={}; state.public="survey"; renderSurvey(); window.scrollTo(0,0); };
+    wrap.querySelector("#decline").onclick=()=>{ state.public="landing"; renderLanding(); window.scrollTo(0,0); };
+  }
+
+  function renderSurvey(){
+    root.innerHTML="";
+    const qHtml = Q.map(q=>{
+      const opts = q.options.map((o,i)=>`
+        <label class="opt" data-q="${q.id}" data-v="${esc(o)}">
+          <input type="radio" name="${q.id}" value="${esc(o)}">
+          <span class="box"></span><span class="label">${esc(o)}</span>
+        </label>`).join("");
+      const optional = !q.required(answers) && q.visible(answers);
+      return `<div class="q" id="q_${q.id}" data-q="${q.id}">
+        <div class="qhead">
+          <span class="qnum">${q.n}.</span>
+          <span class="qtitle">${esc(q.title)}<span class="reqmark"></span></span>
+        </div>
+        <div class="options">${opts}</div>
+        <div class="err">Selecione uma opção para continuar.</div>
+      </div>`;
+    }).join("");
+
+    const wrap = node(`<div class="app"><main class="stage">
+      <div class="brandbar">${WORDMARK}
+        <span class="eyebrow">Suas respostas<span class="dots"><i></i><i></i><i></i></span></span></div>
+      <div class="progress-wrap"><div class="progress">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <div class="track"><div class="fill" id="fill"></div></div>
+        <span class="pct" id="pct">0%</span>
+      </div></div>
+      <section class="card card-pad">
+        <form id="survey" novalidate>
+          ${qHtml}
+          <div class="submit-row">
+            <div class="form-error" id="formerr">Há perguntas obrigatórias sem resposta. Elas estão destacadas acima.</div>
+            <button type="submit" class="btn btn-primary btn-block" id="send">Enviar respostas</button>
+          </div>
+        </form>
+      </section>
+      ${FOOT}
+    </main></div>`);
+    root.appendChild(wrap);
+
+    wrap.querySelectorAll(".opt").forEach(opt=>{
+      opt.addEventListener("click", e=>{
+        e.preventDefault();
+        const qid=opt.dataset.q, val=opt.dataset.v;
+        answers[qid]=val;
+        applyConditionals();
+        syncOptionStyles();
+        const qEl=document.getElementById("q_"+qid); if(qEl) qEl.classList.remove("invalid");
+        document.getElementById("formerr").classList.remove("show");
+        updateProgress();
+      });
+    });
+
+    wrap.querySelector("#survey").addEventListener("submit", e=>{
+      e.preventDefault(); submitSurvey();
+    });
+
+    applyConditionals(); syncOptionStyles(); updateProgress();
+  }
+
+  function applyConditionals(){
+    Q.forEach(q=>{
+      const el=document.getElementById("q_"+q.id); if(!el) return;
+      const vis=q.visible(answers);
+      el.classList.toggle("hidden", !vis);
+      if(!vis && answers[q.id]!==undefined){ delete answers[q.id]; }
+      // marca obrigatório/opcional
+      const mark=el.querySelector(".reqmark");
+      if(mark){
+        if(vis && q.required(answers)) mark.innerHTML=' <span class="req">*</span>';
+        else if(vis) mark.innerHTML=' <span class="optional-tag">opcional</span>';
+        else mark.innerHTML="";
+      }
+    });
+  }
+
+  function syncOptionStyles(){
+    document.querySelectorAll(".opt").forEach(opt=>{
+      const sel = answers[opt.dataset.q]===opt.dataset.v;
+      opt.classList.toggle("checked", sel);
+      const input=opt.querySelector("input"); if(input) input.checked=sel;
+    });
+  }
+
+  function visibleQuestions(){ return Q.filter(q=>q.visible(answers)); }
+
+  function updateProgress(){
+    const vis=visibleQuestions();
+    const answered=vis.filter(q=>answers[q.id]!==undefined).length;
+    const pct=vis.length? Math.round(answered/vis.length*100):0;
+    const f=document.getElementById("fill"), p=document.getElementById("pct");
+    if(f) f.style.width=pct+"%"; if(p) p.textContent=pct+"%";
+  }
+
+  function submitSurvey(){
+    let firstInvalid=null;
+    Q.forEach(q=>{
+      const el=document.getElementById("q_"+q.id); if(!el) return;
+      el.classList.remove("invalid");
+      if(q.visible(answers) && q.required(answers) && answers[q.id]===undefined){
+        el.classList.add("invalid"); if(!firstInvalid) firstInvalid=el;
+      }
+    });
+    if(firstInvalid){
+      document.getElementById("formerr").classList.add("show");
+      firstInvalid.scrollIntoView({behavior:"smooth",block:"center"});
+      return;
+    }
+    const payload={};
+    Q.forEach(q=>{ payload[q.id]= q.visible(answers) ? (answers[q.id]??null) : null; });
+    const btn=document.getElementById("send");
+    btn.disabled=true; btn.textContent="Enviando…";
+    API.submit(payload).then(()=>{
+      state.public="thanks"; renderThanks(); window.scrollTo(0,0);
+    }).catch(err=>{
+      btn.disabled=false; btn.textContent="Enviar respostas";
+      const fe=document.getElementById("formerr");
+      fe.textContent="Não foi possível enviar agora. Verifique sua conexão e tente novamente.";
+      fe.classList.add("show");
+    });
+  }
+
+  function renderThanks(){
+    root.innerHTML="";
+    const wrap=node(`<div class="app"><main class="stage">
+      <div class="brandbar">${WORDMARK}<span class="eyebrow">Concluído<span class="dots"><i></i><i></i><i></i></span></span></div>
+      <section class="card thanks">
+        <div class="puzzle-done">${PUZZLE(64,"var(--blue)")}</div>
+        <h2>Peça encaixada. Obrigado!</h2>
+        <p>Sua resposta foi registrada de forma anônima e já faz parte do retrato da
+           advocacia empreendedora que ajudamos a montar. Até a próxima Jornada!</p>
+      </section>
+      ${FOOT}
+    </main></div>`);
+    root.appendChild(wrap);
+  }
+
+  /* =========================================================
+     ADMIN
+     ========================================================= */
+  const adminState = { tab:"resultados", responses:null, admins:null };
+
+  async function renderAdmin(){
+    const user = API.currentUser() || (await safe(()=>API.restore()));
+    if(!API.currentUser()) return renderLogin();
+    renderDashboard();
+  }
+  function safe(fn){ try{ return fn(); }catch(e){ return null; } }
+
+  function renderLogin(){
+    root.innerHTML="";
+    const wrap=node(`<div class="app"><main class="login-stage">
+      <section class="card card-pad login-card">
+        <div class="mark" style="display:flex;gap:10px;margin-bottom:18px">${PUZZLE(34,"var(--blue)")}${PUZZLE(34,"var(--coral)")}</div>
+        <h2>Área administrativa</h2>
+        <p class="sub">Acesso restrito aos administradores da pesquisa. Os respondentes não precisam de login.</p>
+        <div class="field"><label>Usuário</label><input id="u" autocomplete="username" autofocus></div>
+        <div class="field"><label>Senha</label><input id="p" type="password" autocomplete="current-password"></div>
+        <div class="inline-error" id="le"></div>
+        <button class="btn btn-primary btn-block" id="login" style="margin-top:8px">Entrar</button>
+        <div style="margin-top:18px"><button class="link-quiet" id="back">← Voltar à pesquisa</button></div>
+      </section>
+    </main></div>`);
+    root.appendChild(wrap);
+    const doLogin=async()=>{
+      const u=wrap.querySelector("#u").value.trim(), p=wrap.querySelector("#p").value;
+      const le=wrap.querySelector("#le"); le.textContent="";
+      if(!u||!p){ le.textContent="Informe usuário e senha."; return; }
+      const b=wrap.querySelector("#login"); b.disabled=true; b.textContent="Entrando…";
+      try{ await API.login(u,p); adminState.responses=null; adminState.admins=null; renderDashboard(); }
+      catch(err){ le.textContent=err.message||"Usuário ou senha inválidos."; b.disabled=false; b.textContent="Entrar"; }
+    };
+    wrap.querySelector("#login").onclick=doLogin;
+    wrap.querySelector("#p").addEventListener("keydown",e=>{ if(e.key==="Enter") doLogin(); });
+    wrap.querySelector("#u").addEventListener("keydown",e=>{ if(e.key==="Enter") wrap.querySelector("#p").focus(); });
+    wrap.querySelector("#back").onclick=()=>{ location.hash=""; state.public="landing"; renderLanding(); };
+  }
+
+  function renderDashboard(){
+    const tabs=[["resultados","Resultados"],["configuracoes","Configurações"],["admins","Administradores"]];
+    root.innerHTML="";
+    const wrap=node(`<div class="app admin">
+      <div class="admin-top"><div class="inner">
+        <div class="brand"><div class="oab">OAB<small>SÃO PAULO</small></div>
+          <span style="opacity:.5">·</span> Painel da pesquisa</div>
+        <div class="who">Conectado como <b>${esc(API.currentUser())}</b></div>
+      </div>
+      <nav class="admin-nav">${tabs.map(t=>`<button class="tab ${adminState.tab===t[0]?'active':''}" data-tab="${t[0]}">${t[1]}</button>`).join("")}
+        <button class="tab" data-act="logout" style="margin-left:auto">Sair</button>
+      </nav></div>
+      <div class="admin-body" id="abody"></div>
+    </div>`);
+    root.appendChild(wrap);
+    wrap.querySelectorAll(".tab[data-tab]").forEach(t=>t.onclick=()=>{ adminState.tab=t.dataset.tab; renderDashboard(); });
+    wrap.querySelector('[data-act="logout"]').onclick=()=>{ API.logout(); location.hash=""; state.public="landing"; renderLanding(); };
+    const body=wrap.querySelector("#abody");
+    if(adminState.tab==="resultados") renderResults(body);
+    if(adminState.tab==="configuracoes") renderConfigTab(body);
+    if(adminState.tab==="admins") renderAdminsTab(body);
+  }
+
+  /* ---- Resultados / dashboard ---- */
+  async function renderResults(body){
+    body.innerHTML=`<div class="empty">${PUZZLE(40,"var(--ink)")}<div>Carregando resultados…</div></div>`;
+    let rows;
+    try{ rows = adminState.responses || (adminState.responses = await API.getResponses()); }
+    catch(e){ body.innerHTML=`<div class="note-box">Não foi possível carregar os resultados. Tente novamente.</div>`; return; }
+
+    if(!rows.length){
+      body.innerHTML=`<div class="section-head"><h2>Resultados</h2></div>
+        <div class="empty">${PUZZLE(48,"var(--blue)")}
+        <div style="margin-top:6px">Nenhuma resposta ainda. Assim que alguém responder, os números aparecem aqui.</div></div>`;
+      return;
+    }
+
+    // estatísticas-resumo
+    const total=rows.length;
+    const adv=rows.filter(r=>r.perfil==="Advogado(a)").length;
+    const consideram=rows.filter(r=>r.mudanca==="Sim").length;
+    const escr=rows.filter(r=>r.segmento==="Escritório de advocacia").length;
+
+    let html=`<div class="section-head">
+      <h2>Resultados</h2>
+      <button class="btn btn-ghost btn-sm" id="csv">Exportar CSV</button>
+    </div>
+    <div class="stat-row">
+      <div class="stat accent"><div class="n">${total}</div><div class="l">respostas no total</div></div>
+      <div class="stat"><div class="n">${adv}</div><div class="l">advogados(as)</div></div>
+      <div class="stat"><div class="n">${escr}</div><div class="l">em escritório de advocacia</div></div>
+      <div class="stat"><div class="n">${consideram}</div><div class="l">já pensaram em mudar de carreira</div></div>
+    </div>`;
+
+    // um painel por questão
+    Q.forEach((q,qi)=>{
+      const applicable = rows.filter(r=> applicableForStats(q, r));
+      const denom = applicable.length;
+      const counts={}; q.options.forEach(o=>counts[o]=0);
+      let blank=0;
+      applicable.forEach(r=>{ const v=r[q.id]; if(v==null||v===""){ blank++; } else { counts[v]=(counts[v]||0)+1; } });
+      const maxc=Math.max(1,...Object.values(counts),blank);
+      const meta = denom===total ? `${denom} respostas`
+                 : `${denom} de ${total} respostas se aplicam a esta pergunta`;
+      let bars=q.options.map((o,i)=>barRow(o,counts[o]||0,denom,i)).join("");
+      if(blank>0) bars+=barRow("Em branco",blank,denom,9,true);
+      html+=`<div class="panel"><h3>${q.n}. ${esc(q.title)}</h3>
+        <div class="qmeta">${meta}</div>${bars||'<div class="qmeta">Sem dados.</div>'}</div>`;
+    });
+
+    body.innerHTML=html;
+    const csvBtn=body.querySelector("#csv"); if(csvBtn) csvBtn.onclick=()=>exportCsv(rows);
+  }
+
+  function applicableForStats(q, r){
+    // reconstrói visibilidade a partir da resposta salva
+    return q.visible({ perfil:r.perfil, segmento:r.segmento });
+  }
+  function barRow(name,count,denom,colorIdx,muted){
+    const pct=denom? Math.round(count/denom*100):0;
+    const wide = pct>=14;
+    const cls = muted? "c4" : ("c"+(((colorIdx)%4)+1));
+    const valTxt=`${count} · ${pct}%`;
+    return `<div class="bar-row">
+      <div class="name">${esc(name)}</div>
+      <div class="barwrap">
+        <div class="bar ${cls}" style="width:${Math.max(pct,count?2:0)}%">
+          ${wide?`<span class="val inside">${valTxt}</span>`:""}
+        </div>
+        ${wide?"":`<span class="val">${valTxt}</span>`}
+      </div></div>`;
+  }
+
+  function exportCsv(rows){
+    const cols=Q.map(q=>q.title); const ids=Q.map(q=>q.id);
+    const head=["Data/hora",...cols];
+    const lines=[head];
+    rows.forEach(r=>{
+      const d=r.createdAt?new Date(r.createdAt).toLocaleString("pt-BR"):"";
+      lines.push([d,...ids.map(id=> r[id]==null?"":r[id])]);
+    });
+    const csv="\uFEFF"+lines.map(l=>l.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(";")).join("\r\n");
+    try{
+      const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});
+      const a=document.createElement("a");
+      a.href=URL.createObjectURL(blob); a.download="pesquisa-cel-oabsp.csv";
+      document.body.appendChild(a); a.click(); a.remove();
+      toast("CSV exportado.");
+    }catch(e){ toast("Exportação indisponível neste ambiente."); }
+  }
+
+  /* ---- Configurações (editar título) ---- */
+  function renderConfigTab(body){
+    body.innerHTML=`<div class="section-head"><h2>Configurações</h2></div>
+      <div class="panel" style="max-width:760px">
+        <h3>Título da pesquisa</h3>
+        <div class="qmeta">É o que aparece na tela inicial. Pode ser alterado para reutilizar a pesquisa em outras edições.</div>
+        <div class="field"><textarea id="ttl" rows="3" style="width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;font:inherit;font-size:15px;color:var(--ink);resize:vertical">${esc(surveyTitle)}</textarea></div>
+        <div class="inline-error" id="ce"></div>
+        <button class="btn btn-primary" id="savettl">Salvar título</button>
+      </div>`;
+    body.querySelector("#savettl").onclick=async()=>{
+      const v=body.querySelector("#ttl").value.trim();
+      const ce=body.querySelector("#ce"); ce.textContent="";
+      if(!v){ ce.textContent="O título não pode ficar vazio."; return; }
+      const b=body.querySelector("#savettl"); b.disabled=true; b.textContent="Salvando…";
+      try{ await API.setTitle(v); surveyTitle=v; toast("Título atualizado."); }
+      catch(e){ ce.textContent="Não foi possível salvar."; }
+      finally{ b.disabled=false; b.textContent="Salvar título"; }
+    };
+  }
+
+  /* ---- Administradores ---- */
+  async function renderAdminsTab(body){
+    body.innerHTML=`<div class="empty">${PUZZLE(36,"var(--ink)")}<div>Carregando…</div></div>`;
+    let list;
+    try{ list = await API.listAdmins(); adminState.admins=list; }
+    catch(e){ body.innerHTML=`<div class="note-box">Não foi possível carregar a lista.</div>`; return; }
+    const me=API.currentUser();
+    const rows=list.map(u=>`<tr>
+        <td><b>${esc(u)}</b>${u===me?'<span class="you-tag">você</span>':""}</td>
+        <td style="text-align:right">
+          <button class="btn btn-ghost btn-sm" data-del="${esc(u)}" ${list.length<=1?"disabled title='Não é possível remover o último administrador'":""}>Remover</button>
+        </td></tr>`).join("");
+
+    body.innerHTML=`<div class="section-head"><h2>Administradores</h2></div>
+      <div class="note-box"><b>Importante:</b> ao encerrar a pesquisa você pode remover seu próprio acesso.
+        Crie antes o administrador que ficará responsável — o sistema impede excluir o último administrador para evitar bloqueio total.</div>
+      <div class="panel" style="max-width:760px">
+        <h3>Acessos ativos</h3><div class="qmeta">${list.length} administrador(es).</div>
+        <table class="admin-list"><thead><tr><th>Usuário</th><th></th></tr></thead><tbody>${rows}</tbody></table>
+      </div>
+      <div class="panel" style="max-width:760px">
+        <h3>Criar novo administrador</h3>
+        <div class="field"><label>Usuário</label><input id="nu" autocomplete="off"></div>
+        <div class="field"><label>Senha (mín. 6 caracteres)</label><input id="np" type="password" autocomplete="new-password"></div>
+        <div class="inline-error" id="ae"></div>
+        <button class="btn btn-primary" id="addadm">Criar administrador</button>
+      </div>`;
+
+    body.querySelectorAll("[data-del]").forEach(b=>b.onclick=async()=>{
+      const u=b.dataset.del;
+      if(!confirm(`Remover o administrador “${u}”? Esta ação não pode ser desfeita.`)) return;
+      try{ await API.deleteAdmin(u); toast("Administrador removido."); renderAdminsTab(body);
+        if(u===me){ API.logout(); location.hash=""; state.public="landing"; renderLanding(); }
+      }catch(e){ toast(e.message||"Não foi possível remover."); }
+    });
+    body.querySelector("#addadm").onclick=async()=>{
+      const u=body.querySelector("#nu").value.trim(), p=body.querySelector("#np").value;
+      const ae=body.querySelector("#ae"); ae.textContent="";
+      if(!u){ ae.textContent="Informe um nome de usuário."; return; }
+      if(p.length<6){ ae.textContent="A senha precisa ter ao menos 6 caracteres."; return; }
+      try{ await API.createAdmin(u,p); toast("Administrador criado."); renderAdminsTab(body); }
+      catch(e){ ae.textContent=e.message||"Não foi possível criar."; }
+    };
+  }
+
+  /* ---- boot ---- */
+  window.addEventListener("hashchange", route);
+  (async function boot(){ await loadTitle(); route(); })();
+})();
+
+</script>
+</body>
+</html>
